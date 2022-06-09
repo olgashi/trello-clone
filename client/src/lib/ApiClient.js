@@ -17,14 +17,16 @@ axios.defaults.headers.common["Accept"] = "application/json";
 const apiClient = {
   getBoards: async () => {
     try {
-      return await axios.get(routes.BOARDS_INDEX_URL);
+      const { data } = await axios.get(routes.BOARDS_INDEX_URL);
+      return data;
     } catch (e) {
       logError(e);
     }
   },
   createBoard: async (board) => {
     try {
-      return axios.post(routes.CREATE_BOARD_URL, { board });
+      const { data } = await axios.post(routes.CREATE_BOARD_URL, { board });
+      return data;
     } catch (e) {
       logError(e);
     }
