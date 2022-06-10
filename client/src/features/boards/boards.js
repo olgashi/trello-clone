@@ -1,18 +1,5 @@
-// export default function boards(state = [], action) {
-//   switch (action.type) {
-//     case "FETCH_BOARDS_SUCCESS": {
-//       return action.boards;
-//     }
-//     case "CREATE_BOARD_SUCCESS": {
-//       const newBoard = action.board;
-//       return state.concat(newBoard);
-//     }
-//     default:
-//       return state;
-//   }
-// }
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import apiClient from "../ApiClient";
+import apiClient from "../../lib/ApiClient";
 
 const initialState = [];
 
@@ -36,17 +23,17 @@ const boardSlice = createSlice({
   name: "boards",
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchBoards.fulfilled]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchBoards.fulfilled, (state, action) => {
       return action.payload.reduce((acc, comm) => {
         //eslint-disable-next-line
         const { lists, ...boardWithoutLists } = comm;
         return acc.concat(boardWithoutLists);
       }, []);
-    },
-    [createBoard.fulfilled]: (state, action) => {
-      state.push(action.payload);
-    },
+    }),
+      builder.addCase(createBoard.fulfilled, (state, action) => {
+        state.push(action.payload);
+      });
   },
 });
 

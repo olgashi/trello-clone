@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import useInput from "../../hooks/useInput";
-import { createBoard } from "../../lib/reducers/boards";
+import { createBoard } from "../../features/boards/boards";
 
 const NewBoardForm = (props) => {
   const { value: title, bind: bindTitle } = useInput("");
