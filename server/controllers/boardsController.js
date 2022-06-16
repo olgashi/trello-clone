@@ -4,7 +4,7 @@ const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 
 const getBoards = (req, res, next) => {
-  Board.find({}, "title _id createdAt updatedAt").then((boards) => {
+  Board.find({}, "title _id lists createdAt updatedAt").then((boards) => {
     res.json(boards);
   });
 };
