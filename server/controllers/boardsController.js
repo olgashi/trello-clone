@@ -28,5 +28,31 @@ const createBoard = (req, res, next) => {
   }
 };
 
+const getBoardById = (req, res, next) => {
+  const { id } = req.params;
+
+  if (mongoose.isValidObjectId(id)) {
+    Board.findOne({ _id: id })
+      .populate({
+        path: 'lists',
+        populate: { path: 'cards' }
+      })
+      .then((board) => {
+        if (!board) {
+          return res.json({
+            error: "board id does not exist",
+          })
+        }
+        return res.json(board);
+      })
+  } else {
+    return res.json({
+      error: "Invalid board id provided",
+    })
+  }
+
+}
+
 exports.getBoards = getBoards;
 exports.createBoard = createBoard;
+exports.getBoardById = getBoardById;
