@@ -1,6 +1,7 @@
 const Board = require("../models/board");
 const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
+const mongoose = require("mongoose");
 
 const getBoards = (req, res, next) => {
   Board.find({}, "title _id createdAt updatedAt").then((boards) => {
