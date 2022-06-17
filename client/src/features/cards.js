@@ -1,24 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import apiClient from "../lib/ApiClient";
 import { fetchBoard } from "./boards/boards";
+import lists from "./lists";
 
 const initialState = [];
 
-const listSlice = createSlice({
-  name: "lists",
+const cardSlice = createSlice({
+  name: "cards",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
-      // if (!state.length) {
-      //   state.push(action.payload.lists);
-      // }
-      // console.log(action.payload)
-      return state
-        .filter((l) => l.boardId !== action.payload._id)
-        .concat(action.payload.lists)
+      return action.payload.lists
+        .map((l) => l.cards)
+        .flat();
     })
+
   }
 })
 
-export default listSlice.reducer;
+export default cardSlice.reducer;
