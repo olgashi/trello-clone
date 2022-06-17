@@ -13,17 +13,17 @@ const Board = () => {
   const currentLists = useSelector((state) => {
     return state.lists.filter((l) => l.boardId === boardId)
   })
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     dispatch(fetchBoard(boardId))
 
-  },[dispatch, boardId])
+  }, [dispatch, boardId])
   if (!currentBoard) return null;
-  const {title, _id} = currentBoard;
-  
+  const { title, _id } = currentBoard;
+
   return (
     <>
-       <header>
+      <header>
         <ul>
           <li id="title">{title}</li>
           <li className="star-icon icon"></li>
@@ -37,11 +37,15 @@ const Board = () => {
         </div>
       </header>
       <main>
-        {currentLists.map((l) => {
-          return (
-            <List key={l._id} currentList={l} />
-          )
-        })}
+        <div id="list-container" className="list-container">
+          <div id="existing-lists" className="existing-lists">
+            {currentLists.map((l) => {
+              return (
+                <List key={l._id} currentList={l} />
+              )
+            })}
+          </div>
+        </div>
       </main>
       <div className="menu-sidebar">
         <div id="menu-main" className="main slide">
