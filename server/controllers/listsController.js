@@ -4,24 +4,14 @@ const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
 
 const createList = (req, res, next) => {
-  console.log(req.body)
+
   const errors = validationResult(req);
-  console.log(errors)
+
   if (errors.isEmpty()) {
-    // TODO update the board object with the new list id
     List.create({...req.body.list, boardId: req.body.boardId})
     .then(list => {
-      Board.findOneAndUpdate(
-        { _id: list.boardId },
-        { $push: {lists: list._id} }
-        );
-      return list;
-    })
-    .then(list => {
-      res.json({
-        title: list.title,
-        boardId: list.boardId
-      })
+      req.list = list
+      next();
     })
     .catch(err => {
       next(new HttpError("Creating list failed, please try again", 500));
@@ -31,4 +21,21 @@ const createList = (req, res, next) => {
   }
 }
 
+const addListToBoard =  (req, res, next) => {
+  const list = req.list;
+
+  Board.findOneAndUpdate(
+    { _id: list.boardId },
+    { $push: {lists: list._id} }
+    )
+    .then(_ => {
+      res.json({
+        title: list.title,
+        boardId: list.boardId
+      })
+    })
+    .catch(error => console.log(error))
+}
+
+exports.addListToBoard = addListToBoard;
 exports.createList = createList;
