@@ -1,6 +1,6 @@
 import React from "react";
 
-const AddListForm = () => {
+const NewList = () => {
   return (
     <div id="new-list" className="new-list">
       <span>Add a list...</span>
@@ -13,4 +13,4 @@ const AddListForm = () => {
   )
 }
 
-export default AddListForm
+export default NewList

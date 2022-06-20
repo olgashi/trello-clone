@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import AddListForm from "./AddListForm";
+import NewList from "./NewList";
 import List from "./List"
 
 const Lists = ({boardId}) => {
@@ -16,7 +16,7 @@ const Lists = ({boardId}) => {
         )
       })}
     </div>
-    <AddListForm />
+    <NewList />
   </div>
   )
 }
