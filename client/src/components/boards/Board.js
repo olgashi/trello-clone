@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBoard } from "../../features/boards/boards";
-import List from "./List";
+import Lists from "./Lists";
 
 const Board = () => {
   const boardId = useParams().id;
@@ -10,9 +10,7 @@ const Board = () => {
   const currentBoard = useSelector((state) => {
     return state.boards.find((b) => b._id === boardId)
   })
-  const currentLists = useSelector((state) => {
-    return state.lists.filter((l) => l.boardId === boardId)
-  })
+  
 
   useEffect(() => {
     dispatch(fetchBoard(boardId))
@@ -37,15 +35,7 @@ const Board = () => {
         </div>
       </header>
       <main>
-        <div id="list-container" className="list-container">
-          <div id="existing-lists" className="existing-lists">
-            {currentLists.map((l) => {
-              return (
-                <List key={l._id} currentList={l} />
-              )
-            })}
-          </div>
-        </div>
+       <Lists boardId={boardId}/>
       </main>
       <div className="menu-sidebar">
         <div id="menu-main" className="main slide">
