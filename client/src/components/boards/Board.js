@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchBoard } from "../../features/boards/boards";
 import Lists from "./Lists";
 
+
 const Board = () => {
   const boardId = useParams().id;
   const dispatch = useDispatch()
