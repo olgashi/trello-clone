@@ -1,4 +1,5 @@
 const List = require("../models/list");
+const Board = require("../models/board");
 const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
 
@@ -9,6 +10,13 @@ const createList = (req, res, next) => {
   if (errors.isEmpty()) {
     // TODO update the board object with the new list id
     List.create({...req.body.list, boardId: req.body.boardId})
+    .then(list => {
+      Board.findOneAndUpdate(
+        { _id: list.boardId },
+        { $push: {lists: list._id} }
+        );
+      return list;
+    })
     .then(list => {
       res.json({
         title: list.title,
