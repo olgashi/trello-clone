@@ -22,9 +22,7 @@ export const createBoard = createAsyncThunk(
 export const fetchBoard = createAsyncThunk(
   "boards/fetchBoard", 
   async(boardID, callback) => {
-
     const data = await apiClient.getBoard(boardID);
-
     if (callback) {
       callback;
     }
@@ -43,7 +41,6 @@ const boardSlice = createSlice({
       state.push(action.payload);
     }),
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
-      console.log("fetch board case")
       const found = state.find((b) => b._id === action.payload._id)
       if (found) {
         return state

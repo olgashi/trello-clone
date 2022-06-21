@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import apiClient from "../../lib/ApiClient";
-
+import { useDispatch } from "react-redux";
+import { createList } from "../../features/lists";
 
 const NewList = ({boardId}) => {
   const [formVisible, setFormVisible] = useState(false);
   const [newListTitle, setNewListTitle] = useState("");
+  const dispatch = useDispatch()
 
   const handleNewListClick = () => {
     setFormVisible(true);
   };
   const handleSaveNewListClick = (e) => {
+    e.preventDefault();
     e.stopPropagation();
-    // setFormVisible(false);
     if (newListTitle.length > 1) {
-      apiClient.createList(boardId, newListTitle).then((d) => console.log(d))
+      dispatch(createList({boardId, title: newListTitle}));
+      setNewListTitle("");
+      setFormVisible(false);
     } else {
       alert("List title is empty")
     }
-    
   };
   const handleXOutNewListClick = (e) => {
     e.stopPropagation();
@@ -28,15 +31,6 @@ const NewList = ({boardId}) => {
     setNewListTitle(e.target.value);
   }
 
-  /* when we click save:
-   if title length is greater than 1
-     - make a post to api/lists (send title and boaardId)
-     - clear the form (component state)
-     - set formVisible to false
-     - update STORE state
-   else
-     - let the user know to title is empty
-*/
   return (
     <div id="new-list" className={`new-list ${formVisible ? "selected" : ""}`} onClick={handleNewListClick}>
       <span>Add a list...</span>

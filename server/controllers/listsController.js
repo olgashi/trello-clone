@@ -4,7 +4,6 @@ const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
 
 const createList = (req, res, next) => {
-
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
