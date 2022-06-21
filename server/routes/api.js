@@ -7,6 +7,7 @@ const { validateBoard, validateList } = require("../validators/validators");
 router.get("/boards", boardsController.getBoards);
 router.get('/boards/:id', boardsController.getBoardById);
 router.post("/boards", validateBoard, boardsController.createBoard);
+router.put("/lists/:id", listsController.updateListTitle);
 router.post("/lists", validateList, listsController.createList, listsController.addListToBoard);
 
 module.exports = router;

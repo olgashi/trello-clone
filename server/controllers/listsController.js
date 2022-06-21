@@ -20,7 +20,7 @@ const createList = (req, res, next) => {
   }
 }
 
-const addListToBoard =  (req, res, next) => {
+const addListToBoard = (req, res, next) => {
   const list = req.list;
 
   Board.findOneAndUpdate(
@@ -36,5 +36,28 @@ const addListToBoard =  (req, res, next) => {
     .catch(error => console.log(error))
 }
 
+const updateListTitle = (req, res, next) => {
+  const listId = req.params.id;
+  const { title } = req.body;
+
+  List.findOneAndUpdate(
+    { _id: listId },
+    { $set: {title: title }},
+    { new: true }
+  )
+  .then(data => res.json(data))
+  .catch(error => console.log(error))
+
+
+  /*
+  {
+  "title": "Updated title",
+  "position": 137882
+}
+
+*/
+}
+
+exports.updateListTitle = updateListTitle;
 exports.addListToBoard = addListToBoard;
 exports.createList = createList;
