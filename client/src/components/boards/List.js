@@ -7,6 +7,7 @@ const List = (props) => {
   const currentCards = useSelector(state => {
     return state.cards.filter(card => card.listId === _id);
   });
+  const [editingTitle, setEditingTitle] = useState(false);
 
   return (
     <div className="list-wrapper">
@@ -14,6 +15,8 @@ const List = (props) => {
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
           <div>
+          {/* TODO see 1.1.1. List titles in ui docs 
+          */}
             <p className="list-title">{title}</p>
           </div>
           <div className="add-dropdown add-top">
