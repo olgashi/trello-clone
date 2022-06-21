@@ -16,7 +16,7 @@ const Lists = ({boardId}) => {
         )
       })}
     </div>
-    <NewList />
+    <NewList boardId={boardId}/>
   </div>
   )
 }

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import apiClient from "../../lib/ApiClient";
 
 
-const NewList = () => {
+const NewList = ({boardId}) => {
   const [formVisible, setFormVisible] = useState(false);
   const [newListTitle, setNewListTitle] = useState("");
 
@@ -10,7 +11,9 @@ const NewList = () => {
   };
   const handleSaveNewListClick = (e) => {
     e.stopPropagation();
-    setFormVisible(false);
+    // setFormVisible(false);
+    console.log(boardId, newListTitle);
+    apiClient.createList(boardId, newListTitle).then((d) => console.log(d))
   };
   const handleXOutNewListClick = (e) => {
     e.stopPropagation();
@@ -21,6 +24,15 @@ const NewList = () => {
     setNewListTitle(e.target.value);
   }
 
+  /* when we click save:
+   if title length is greater than 1
+     - make a post to api/lists (send title and boaardId)
+     - clear the form (component state)
+     - set formVisible to false
+     - update STORE state
+   else
+     - let the user know to title is empty
+*/
   return (
     <div id="new-list" className={`new-list ${formVisible ? "selected" : ""}`} onClick={handleNewListClick}>
       <span>Add a list...</span>
