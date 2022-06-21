@@ -11,12 +11,19 @@ const cardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
-      return action.payload.lists
+      const cardsOnBoard = action.payload.lists
         .map((l) => l.cards)
         .flat();
+      cardsOnBoard.forEach((c) => {
+        const found = state.find((existingCard) => existingCard._id === c._id);
+        if (!found) {
+          state.push(c);
+        }
+      })
     })
 
   }
+
 })
 
 export default cardSlice.reducer;
