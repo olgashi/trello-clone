@@ -40,22 +40,22 @@ const updateListTitle = (req, res, next) => {
   const listId = req.params.id;
   const { title } = req.body;
 
-  List.findOneAndUpdate(
-    { _id: listId },
-    { $set: {title: title }},
-    { new: true }
-  )
-  .then(data => res.json(data))
-  .catch(error => console.log(error))
+  const errors = validationResult(req);
 
+  if (errors.isEmpty()) {
+    List.findOneAndUpdate(
+      { _id: listId },
+      { $set: {title: title }},
+      { new: true }
+    )
+    .then(data => res.json(data))
+    .catch(error => 
+      next(new HttpError("Updating list title failed, please try again", 500))
+    )
 
-  /*
-  {
-  "title": "Updated title",
-  "position": 137882
-}
-
-*/
+  } else {
+    return next(new HttpError("The title is empty", 404));
+  }
 }
 
 exports.updateListTitle = updateListTitle;
