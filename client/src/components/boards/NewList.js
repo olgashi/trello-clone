@@ -12,8 +12,12 @@ const NewList = ({boardId}) => {
   const handleSaveNewListClick = (e) => {
     e.stopPropagation();
     // setFormVisible(false);
-    console.log(boardId, newListTitle);
-    apiClient.createList(boardId, newListTitle).then((d) => console.log(d))
+    if (newListTitle.length > 1) {
+      apiClient.createList(boardId, newListTitle).then((d) => console.log(d))
+    } else {
+      alert("List title is empty")
+    }
+    
   };
   const handleXOutNewListClick = (e) => {
     e.stopPropagation();
