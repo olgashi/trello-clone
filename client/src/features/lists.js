@@ -16,6 +16,18 @@ export const createList = createAsyncThunk(
   }
 )
 
+export const updateListTitle = createAsyncThunk(
+  "lists/updateListTitle",
+  async (args) => {
+    const {listId, title, callback} = args;
+    const data = await apiClient.updateListTitle(listId, title);
+    if (callback) {
+      callback;
+    }
+    return data;
+  }
+)
+
 const listSlice = createSlice({
   name: "lists",
   initialState,
@@ -28,6 +40,10 @@ const listSlice = createSlice({
     }),
     builder.addCase(createList.fulfilled, (state, action) => {
       state.push(action.payload);
+    }),
+    builder.addCase(updateListTitle.fulfilled, (state, action)=> {
+      const currentList = state.find((l) => l._id === action.payload._id)
+      currentList.title = action.payload.title;
     })
   }
 })
