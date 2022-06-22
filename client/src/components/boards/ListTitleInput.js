@@ -6,12 +6,14 @@ const ListTitleInput = ({ title, listId }) => {
   const [currentTitle, setCurrentTitle] = useState(title)
   const changeHandler = (e) => setCurrentTitle(e.target.value)
   const dispatch = useDispatch();
+
   const submitNewTitle = () => {
     dispatch(updateListTitle({title: currentTitle, listId}));
   }
-  const handleEnterPress= (e) => {
-    if (e.key === 'Enter'){
-      e.target.blur()
+
+  const handleEnterPress = (e) => {
+    if (e.key === 'Enter') {
+      e.target.blur();
     }
   }
 
@@ -22,7 +24,6 @@ const ListTitleInput = ({ title, listId }) => {
       onChange={changeHandler} 
       onBlur={submitNewTitle}
       onKeyDown={handleEnterPress}
-
     />
   )
 }
