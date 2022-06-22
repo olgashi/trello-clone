@@ -6,8 +6,13 @@ const ListTitleInput = ({ title, listId }) => {
   const [currentTitle, setCurrentTitle] = useState(title)
   const changeHandler = (e) => setCurrentTitle(e.target.value)
   const dispatch = useDispatch();
-  const sumbitNewTitle = () => {
+  const submitNewTitle = () => {
     dispatch(updateListTitle({title: currentTitle, listId}));
+  }
+  const handleEnterPress= (e) => {
+    if (e.key === 'Enter'){
+      e.target.blur()
+    }
   }
 
   return (
@@ -15,9 +20,10 @@ const ListTitleInput = ({ title, listId }) => {
       className="list-title"  
       value={currentTitle} 
       onChange={changeHandler} 
-      onBlur={sumbitNewTitle}>
+      onBlur={submitNewTitle}
+      onKeyDown={handleEnterPress}
 
-    </input>
+    />
   )
 }
 
