@@ -21,7 +21,7 @@ const List = (props) => {
           <div>
           {/* TODO see 1.1.1. List titles in ui docs 
           */}
-          { editingTitle? <ListTitleInput title={title}/> : <ListTitleParagraph title={title} handleClick={listTitleClick}/>}
+          { editingTitle? <ListTitleInput title={title} listId={_id}/> : <ListTitleParagraph title={title} handleClick={listTitleClick}/>}
           </div>
           <div className="add-dropdown add-top">
             <div className="card"></div>
