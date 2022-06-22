@@ -20,7 +20,7 @@ const createList = (req, res, next) => {
   }
 }
 
-const addListToBoard =  (req, res, next) => {
+const addListToBoard = (req, res, next) => {
   const list = req.list;
 
   Board.findOneAndUpdate(
@@ -36,5 +36,28 @@ const addListToBoard =  (req, res, next) => {
     .catch(error => console.log(error))
 }
 
+const updateListTitle = (req, res, next) => {
+  const listId = req.params.id;
+  const { title } = req.body;
+
+  const errors = validationResult(req);
+
+  if (errors.isEmpty()) {
+    List.findOneAndUpdate(
+      { _id: listId },
+      { $set: {title: title }},
+      { new: true }
+    )
+    .then(data => res.json(data))
+    .catch(error => 
+      next(new HttpError("Updating list title failed, please try again", 500))
+    )
+
+  } else {
+    return next(new HttpError("The title is empty", 404));
+  }
+}
+
+exports.updateListTitle = updateListTitle;
 exports.addListToBoard = addListToBoard;
 exports.createList = createList;
