@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import apiClient from "../lib/ApiClient";
 import { fetchBoard } from "./boards/boards";
+import { createCard } from "./cards";
 
 const initialState = [];
 
@@ -44,6 +45,10 @@ const listSlice = createSlice({
     builder.addCase(updateListTitle.fulfilled, (state, action)=> {
       const currentList = state.find((l) => l._id === action.payload._id)
       currentList.title = action.payload.title;
+    }),
+    builder.addCase(createCard.fulfilled, (state, action) => {
+      const currentList = state.find((l) => l._id === action.payload.listId);
+      currentList.cards.push(action.payload);
     })
   }
 })

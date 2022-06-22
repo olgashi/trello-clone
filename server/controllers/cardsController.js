@@ -50,7 +50,7 @@ const addCardToList = (req, res, next) =>{
     .then(_ => res.json(card))
     .catch(error => 
       next(new HttpError("Adding card to list failed, please try again", 500))
-      )
+    )
 }
 
 exports.getCardById = getCardById;

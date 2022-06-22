@@ -5,6 +5,19 @@ import lists from "./lists";
 
 const initialState = [];
 
+export const createCard = createAsyncThunk(
+  "cards/createCard",
+  async (args) => {
+    const { listId, card, callback } = args;
+    const data = await apiClient.createCard(listId, card);
+
+    if (callback) {
+      callback;
+    }
+    return data;
+  }
+)
+
 const cardSlice = createSlice({
   name: "cards",
   initialState,
@@ -20,10 +33,11 @@ const cardSlice = createSlice({
           state.push(c);
         }
       })
+    }),
+    builder.addCase(createCard.fulfilled, (state, action) => {
+      state.push(action.payload);
     })
-
   }
-
 })
 
 export default cardSlice.reducer;
