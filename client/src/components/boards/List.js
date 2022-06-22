@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState} from "react";
 import { useSelector } from "react-redux";
 import Card from "./Card";
+import ListTitleInput from "./ListTitleInput";
+import ListTitleParagraph from "./ListTitleParagraph";
+
 
 const List = (props) => {
   const { title, _id } = props.currentList;
@@ -8,6 +11,7 @@ const List = (props) => {
     return state.cards.filter(card => card.listId === _id);
   });
   const [editingTitle, setEditingTitle] = useState(false);
+  const listTitleClick = () => setEditingTitle(true)
 
   return (
     <div className="list-wrapper">
@@ -17,7 +21,7 @@ const List = (props) => {
           <div>
           {/* TODO see 1.1.1. List titles in ui docs 
           */}
-            <p className="list-title">{title}</p>
+          { editingTitle? <ListTitleInput title={title}/> : <ListTitleParagraph title={title} handleClick={listTitleClick}/>}
           </div>
           <div className="add-dropdown add-top">
             <div className="card"></div>
