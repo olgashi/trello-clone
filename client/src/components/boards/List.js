@@ -7,6 +7,8 @@ import ListTitleParagraph from "./ListTitleParagraph";
 
 const List = (props) => {
   const { title, _id } = props.currentList;
+  const { addingCardToList, handleAddCardClick } = props;
+
   const currentCards = useSelector(state => {
     return state.cards.filter(card => card.listId === _id);
   });
@@ -14,7 +16,7 @@ const List = (props) => {
   const listTitleClick = () => setEditingTitle(true)
 
   return (
-    <div className="list-wrapper">
+    <div className={`list-wrapper ${addingCardToList === _id ? 'add-dropdown-active' : ''}`}>
       <div className="list-background">
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
@@ -44,7 +46,7 @@ const List = (props) => {
             })}
 
           </div>
-          <div className="add-dropdown add-bottom">
+          <div className={`add-dropdown add-bottom ${addingCardToList === _id ? 'active-card' : ''}`}>
             <div className="card">
               <div className="card-info"></div>
               <textarea name="add-card"></textarea>
@@ -56,7 +58,10 @@ const List = (props) => {
               <span>...</span>
             </div>
           </div>
-          <div className="add-card-toggle" data-position="bottom">
+          <div 
+            className="add-card-toggle" 
+            data-position="bottom" 
+            onClick={(_) => handleAddCardClick(_id)}>
             Add a card...
           </div>
         </div>
