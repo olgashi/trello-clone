@@ -49,7 +49,7 @@ const List = (props) => {
 
           </div>
           {addingCardToList === _id ?
-            <AddCardForm resetAddingCardToList={resetAddingCardToList}/> :
+            <AddCardForm resetAddingCardToList={resetAddingCardToList} _id={_id}/> :
             <AddCardToggle handleAddCardClick={handleAddCardClick} _id={_id} />
           }
 
