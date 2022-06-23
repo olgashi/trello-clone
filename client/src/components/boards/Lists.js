@@ -31,12 +31,22 @@ const Lists = ({boardId}) => {
     setAddingCardToList(id);
   }
 
+  const resetAddingCardToList = () => {
+    setAddingCardToList("");
+  }
+
   return (
     <div id="list-container" className="list-container">
     <div id="existing-lists" className="existing-lists">
       {currentLists.map((l) => {
         return (
-          <List key={l._id} currentList={l} addingCardToList={addingCardToList} handleAddCardClick={handleAddCardClick}/>
+          <List 
+            key={l._id}
+            currentList={l} 
+            addingCardToList={addingCardToList} 
+            handleAddCardClick={handleAddCardClick}
+            resetAddingCardToList={resetAddingCardToList}
+          />
         )
       })}
     </div>
