@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const AddCardForm = () => {
+const AddCardForm = ({resetAddingCardToList}) => {
   const [cardTitle, setCardTitle] = useState('')
   const handleOnChange = (e) => setCardTitle(e.target.value)
   return (
@@ -11,7 +11,7 @@ const AddCardForm = () => {
       <div className="members"></div>
     </div>
     <a className="button">Add</a>
-    <i className="x-icon icon"></i>
+    <i className="x-icon icon" onClick={resetAddingCardToList}></i>
     <div className="add-options">
       <span>...</span>
     </div>
