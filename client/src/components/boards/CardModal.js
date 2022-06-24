@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCard } from "../../features/cards";
 
@@ -17,13 +17,15 @@ const CardModal = () => {
 
   if (!currentCard) return null;
 
-  const { title, description } = currentCard;
+  const { title, description, boardId} = currentCard;
 
   return (
     <div id="modal-container">
       <div className="screen"></div>
       <div id="modal">
-        <i className="x-icon icon close-modal" onClick={()=>console.log("clicked on X")}></i>
+      <Link to={`/boards/${boardId}`}>
+        <i className="x-icon icon close-modal"></i>
+      </Link>
         <header>
           <i className="card-icon icon .close-modal"></i>
           <textarea className="list-title" style={{ height: "45px" }}>
