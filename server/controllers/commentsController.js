@@ -23,7 +23,7 @@ const addCommentToCard = (req, res, next) => {
   const comment = req.comment;
   Card.findOneAndUpdate(
     { _id: comment.cardId },
-    { $push: { comments: comment._id } }
+    { $push: { comments: comment._id }, $inc : {commentsCount : 1}} 
   ).then(_ => res.json(comment))
     .catch(_ =>
       next(new HttpError("Adding comment to card failed, please try again", 500))
