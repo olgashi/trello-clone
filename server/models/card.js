@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Comment = require('./comment');
 const Schema = mongoose.Schema;
 
 const CardSchema = new Schema({
@@ -28,7 +29,10 @@ const CardSchema = new Schema({
   },
   commentsCount: {
     type: Number,
-  }
+  },
+  comments: [
+    {type: Schema.Types.ObjectId, ref: Comment}
+  ]
 })
 
 
