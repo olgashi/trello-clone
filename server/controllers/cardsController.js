@@ -5,8 +5,6 @@ const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 
 const getCardById = (req, res, next) => {
-  // const errors = validationResult(req);
-
   const { id } = req.params;
 
   if (mongoose.isValidObjectId(id)) {

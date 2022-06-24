@@ -18,6 +18,17 @@ export const createCard = createAsyncThunk(
   }
 )
 
+export const fetchCard = createAsyncThunk(
+  "cards/fetchCard",
+  async(args) => {
+    const { cardId, callback } = args;
+    const data = await apiClient.getCard(cardId);
+    if (callback) {
+      callback;
+    }
+    return data;
+})
+
 const cardSlice = createSlice({
   name: "cards",
   initialState,
@@ -35,6 +46,13 @@ const cardSlice = createSlice({
       })
     }),
     builder.addCase(createCard.fulfilled, (state, action) => {
+      state.push(action.payload);
+    }),
+    builder.addCase(fetchCard.fulfilled, (state, action) => {
+      const found = state.find(card => card._id === action.payload._id)
+      if (found) {
+        return state;
+      }
       state.push(action.payload);
     })
   }

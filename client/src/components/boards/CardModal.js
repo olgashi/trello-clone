@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCard } from "../../features/cards";
 
 const CardModal = () => {
+
+  const cardId = useParams().id;
+  const dispatch = useDispatch();
+  const currentCard = useSelector(state => {
+    return state.cards.find(card => card._id === cardId);
+  })
+
+  useEffect(() => {
+    dispatch(fetchCard({ cardId }))
+  }, [dispatch, cardId])
+
+  if (!currentCard) return null;
+
+  const { title, description } = currentCard;
+
   return (
     <div id="modal-container">
       <div className="screen"></div>
@@ -9,8 +27,7 @@ const CardModal = () => {
         <header>
           <i className="card-icon icon .close-modal"></i>
           <textarea className="list-title" style={{ height: "45px" }}>
-            Cards do many cool things. Click on this card to open it and learn
-            more...
+            {title}
           </textarea>
           <p>
             in list <a className="link">Stuff to try (this is a list)</a>
