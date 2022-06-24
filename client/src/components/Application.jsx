@@ -22,7 +22,7 @@ const Application = () => {
       <TopNav />
       <Route path="/" exact component={BoardsDashboardContainer} />
       <Route path="/boards/:id" component={Board} />
-      <Route path="/cards/:id" exact commponent={CardModal} />
+      <Route path="/cards/:id" exact component={CardModal} />
       <Route path="/ui" exact component={UISection} />
       <Route path="/ui/allBoards" component={AllBoards} />
       <Route path="/ui/cardArchived" component={CardArchived} />

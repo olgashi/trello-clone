@@ -1,10 +1,11 @@
 import React from "react";
+
 const CardModal = () => {
   return (
     <div id="modal-container">
       <div className="screen"></div>
       <div id="modal">
-        <i className="x-icon icon close-modal"></i>
+        <i className="x-icon icon close-modal" onClick={()=>console.log("clicked on X")}></i>
         <header>
           <i className="card-icon icon .close-modal"></i>
           <textarea className="list-title" style={{ height: "45px" }}>
