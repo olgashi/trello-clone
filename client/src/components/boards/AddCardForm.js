@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import { useDispatch } from "react-redux";
 import { createCard } from "../../features/cards";
+import { useParams } from "react-router-dom";
 
 const AddCardForm = ({resetAddingCardToList, _id}) => {
+  const currentBoardId = useParams().id;
   const [cardTitle, setCardTitle] = useState('');
   const dispatch = useDispatch();
   const handleOnChange = (e) => setCardTitle(e.target.value)
@@ -11,10 +13,12 @@ const AddCardForm = ({resetAddingCardToList, _id}) => {
       {listId: _id,
       card: {
         title: cardTitle,
+        boardId: currentBoardId
       }}
     ))
     resetAddingCardToList()
   }
+
   return (
     <div className="add-dropdown add-bottom active-card">
     <div className="card">
