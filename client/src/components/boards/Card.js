@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Card = ({ cardLabels, cardTitle, cardDueDate, cardDescription, cardPosition, cardCommentsCount}) => {
+const Card = ({ cardId, cardLabels, cardTitle, cardDueDate, cardDescription, cardPosition, cardCommentsCount}) => {
   return (
     <div className="card-background">
-      <div className="card ">
+    <Link to={`/cards/${cardId}`}>
+      <div className="card">
         <i className="edit-toggle edit-icon sm-icon"></i>
         <div className="card-info">
           <div className="card-label green colorblindable"></div>
@@ -22,6 +24,7 @@ const Card = ({ cardLabels, cardTitle, cardDueDate, cardDescription, cardPositio
           <i className="comment-icon sm-icon"></i>
         </div>
       </div>
+    </Link>
     </div>
   )
 }

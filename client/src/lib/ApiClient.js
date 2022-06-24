@@ -31,6 +31,14 @@ const apiClient = {
       logError(e);
     }
   },
+  getCard: async (cardId) => {
+    try {
+      const { data } = await axios.get(`${routes.GET_CARD_URL}${cardId}`);
+      return data;
+    } catch (e) {
+      logError(e);
+    }
+  },
   createBoard: async (board) => {
     try {
       const { data } = await axios.post(routes.CREATE_BOARD_URL, { board });
@@ -49,7 +57,18 @@ const apiClient = {
       });
       return data;
     } catch (e) {
-      logError(e)
+      logError(e);
+    }
+  },
+  createCard: async (listId, card) => {
+    try {
+      const { data } = await axios.post(routes.CREATE_CARD_URL, 
+        { listId, card }
+        );
+      return data;
+      
+    } catch (e) {
+      logError(e);
     }
   },
   updateListTitle: async(listId, title) => {
