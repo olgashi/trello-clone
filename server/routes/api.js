@@ -12,7 +12,9 @@ router.post("/boards", validateBoard, boardsController.createBoard);
 router.put("/lists/:id", validateListTitle, listsController.updateListTitle);
 router.post("/lists", validateList, listsController.createList, listsController.addListToBoard);
 router.get("/cards/:id", cardsController.getCardById);
+// router.put("/card/:id", )
 router.post("/cards", validateCard, cardsController.createCard, cardsController.addCardToList);
 router.post("/comments", validateComment, commentsController.createComment, commentsController.addCommentToCard)
+
 
 module.exports = router;

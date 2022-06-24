@@ -33,12 +33,3 @@ const addCommentToCard = (req, res, next) => {
 
 exports.createComment = createComment;
 exports.addCommentToCard = addCommentToCard;
-
-/**
- * {
-  "cardId": 9,
-  "comment": {
-    "text": "This is my comment"
-  }
-}
- */
