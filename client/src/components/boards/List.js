@@ -38,6 +38,7 @@ const List = (props) => {
               return (
                 <Card
                   key={card._id}
+                  cardId={card._id}
                   cardTitle={card.title}
                   cardLabels={card.labels}
                   cardDueDate={card.dueDate}

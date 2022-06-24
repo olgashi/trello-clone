@@ -14,6 +14,7 @@ import LabelsPopover from "./ui/LabelsPopover";
 import MoveCardPopover from "./ui/MoveCardPopover";
 import SingleBoard from "./ui/SingleBoard";
 import Board from "./boards/Board";
+import CardModal from "./boards/CardModal";
 
 const Application = () => {
   return (
@@ -21,6 +22,7 @@ const Application = () => {
       <TopNav />
       <Route path="/" exact component={BoardsDashboardContainer} />
       <Route path="/boards/:id" component={Board} />
+      <Route path="/cards/:id" exact commponent={CardModal} />
       <Route path="/ui" exact component={UISection} />
       <Route path="/ui/allBoards" component={AllBoards} />
       <Route path="/ui/cardArchived" component={CardArchived} />
